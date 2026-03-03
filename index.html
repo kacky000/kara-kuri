@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KaRa-KuRi（からくり）| AI導入支援・マーケティング支援</title>
+  <meta name="description" content="個人事業主・中小企業から大企業まで。AI導入支援とマーケティング支援で業務効率化・コスト削減を実現する伴走型パートナー。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN SYSTEM — Literary Editorial × Stadium Classic ===== */
+    :root {
+      --bg:       #FAFAF8;
+      --bg-warm:  #F2EFE8;
+      --dark:     #111110;
+      --dark2:    #1E1E1B;
+      --accent:   #E8410A;
+      --accent2:  #C0360A;
+      --line:     #D0CCC4;
+      --sub:      #6B6560;
+      --white:    #FFFFFF;
+      --mono:     'Space Mono', 'Courier New', monospace;
+      --sans:     'Noto Sans JP', sans-serif;
+      --serif:    'Noto Serif JP', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== LAYOUT ===== */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+    .wrap-full { max-width: 100%; padding: 0 40px; }
+
+    /* ===== RULE LINE ===== */
+    .rule { border: none; border-top: 1.5px solid var(--dark); }
+    .rule-light { border: none; border-top: 1px solid var(--line); }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1.5px solid var(--dark);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .logo {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      gap: 3px;
+    }
+    .logo em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .logo-ja {
+      font-family: var(--serif);
+      font-size: 0.58rem;
+      font-weight: 400;
+      color: var(--sub);
+      letter-spacing: 0.22em;
+      text-transform: none;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    nav a {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dark);
+      transition: color 0.15s;
+    }
+    nav a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--dark) !important;
+      color: var(--bg) !important;
+      padding: 9px 20px;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.06em;
+      transition: background 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--accent) !important; color: var(--white) !important; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: 64px;
+      background: var(--bg);
+      border-bottom: 1.5px solid var(--dark);
+    }
+    .hero-top {
+      padding: 20px 0 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+    }
+    .hero-issue {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--sub);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-date {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--sub);
+      letter-spacing: 0.06em;
+    }
+    .hero-main {
+      padding: 48px 0 56px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 60px;
+      align-items: end;
+    }
+    .hero-heading-wrap {
+      position: relative;
+    }
+    .hero-deco {
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--serif);
+      font-size: clamp(6rem, 14vw, 13rem);
+      font-weight: 900;
+      color: var(--dark);
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      line-height: 1;
+      z-index: 0;
+    }
+    .hero-heading {
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-family: var(--sans);
+      position: relative;
+      z-index: 1;
+    }
+    .hero-heading .accent-line { color: var(--accent); }
+    .hero-aside {
+      padding-bottom: 8px;
+    }
+    .hero-aside p {
+      font-size: 0.95rem;
+      color: var(--sub);
+      line-height: 1.85;
+      margin-bottom: 32px;
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+    }
+    .hero-ctas { display: flex; flex-direction: column; gap: 12px; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 16px 24px;
+      letter-spacing: 0.02em;
+      transition: background 0.15s;
+      border: 2px solid var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+    .btn-primary .arrow { font-family: var(--mono); font-size: 1rem; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 15px 24px;
+      letter-spacing: 0.02em;
+      border: 2px solid var(--dark);
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-secondary:hover { background: var(--dark); color: var(--bg); }
+    .btn-secondary .arrow { font-family: var(--mono); font-size: 1rem; }
+    /* Hero cards strip */
+    .hero-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1.5px solid var(--dark);
+    }
+    .hero-card {
+      padding: 28px 24px;
+      border-right: 1.5px solid var(--dark);
+      transition: background 0.2s, color 0.2s;
+      cursor: default;
+    }
+    .hero-card:last-child { border-right: none; }
+    .hero-card:hover { background: var(--dark); color: var(--bg); }
+    .hero-card:hover .hc-label { color: var(--accent); }
+    .hero-card:hover .hc-item { border-bottom-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.75); }
+    .hc-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+    .hc-label {
+      font-size: 0.88rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .hc-list { list-style: none; }
+    .hc-item {
+      font-size: 0.82rem;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hc-item::before { content: '—'; font-family: var(--mono); color: var(--accent); font-size: 0.8rem; flex-shrink: 0; }
+
+    /* ===== SECTION HEADER STYLE ===== */
+    .sec-header {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 40px 0 32px;
+      border-bottom: 1.5px solid var(--dark);
+      margin-bottom: 60px;
+    }
+    .sec-num {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--sub);
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+    .sec-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .sec-title .acc { color: var(--accent); }
+    .sec-desc {
+      margin-left: auto;
+      max-width: 320px;
+      font-size: 0.85rem;
+      color: var(--sub);
+      line-height: 1.75;
+      text-align: right;
+    }
+
+    /* ===== PAIN SECTION ===== */
+    .pain { background: var(--bg); padding: 0 0 80px; }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .pain-card {
+      padding: 28px 24px;
+      border: 1.5px solid var(--dark);
+      margin: -1.5px 0 0 -1.5px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .pain-card:hover { background: var(--dark); color: var(--bg); }
+    .pain-card:hover .pain-num { color: var(--accent); }
+    .pain-card:hover .pain-body { color: rgba(255,255,255,0.7); }
+    .pain-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      margin-bottom: 14px;
+    }
+    .pain-card h3 { font-size: 1rem; font-weight: 900; margin-bottom: 10px; line-height: 1.4; }
+    .pain-body { font-size: 0.83rem; color: var(--sub); line-height: 1.75; }
+
+    /* ===== WHY SECTION ===== */
+    .why { background: var(--dark); color: var(--bg); padding: 0 0 80px; }
+    .why .sec-header { border-bottom-color: rgba(255,255,255,0.2); }
+    .why .sec-num { color: rgba(255,255,255,0.35); }
+    .why .sec-desc { color: rgba(255,255,255,0.5); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .why-card {
+      padding: 36px 32px;
+      border: 1px solid rgba(255,255,255,0.15);
+      margin: -1px 0 0 -1px;
+      transition: background 0.2s;
+    }
+    .why-card:hover { background: rgba(255,255,255,0.05); }
+    .why-card-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+    }
+    .why-card h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 12px; }
+    .why-card p { font-size: 0.87rem; color: rgba(255,255,255,0.55); line-height: 1.8; }
+
+    /* ===== SERVICES ===== */
+    .services { background: var(--bg); padding: 0 0 80px; }
+    .services-list {}
+    .service-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      gap: 0;
+      border-bottom: 1.5px solid var(--dark);
+      transition: background 0.2s;
+    }
+    .service-item:first-child { border-top: 1.5px solid var(--dark); }
+    .service-item:hover { background: var(--dark2); color: var(--bg); }
+    .service-item:hover .svc-num { color: var(--accent); }
+    .service-item:hover .svc-desc { color: rgba(255,255,255,0.55); }
+    .service-item:hover .svc-tag { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.6); }
+    .service-item:hover .svc-list li { border-bottom-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.65); }
+    .svc-num-col {
+      padding: 32px 24px;
+      border-right: 1.5px solid var(--dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .service-item:hover .svc-num-col { border-right-color: rgba(255,255,255,0.15); }
+    .svc-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+    }
+    .svc-main {
+      padding: 32px 32px;
+      border-right: 1.5px solid var(--dark);
+    }
+    .service-item:hover .svc-main { border-right-color: rgba(255,255,255,0.15); }
+    .svc-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--dark);
+      padding: 3px 10px;
+      margin-bottom: 14px;
+      color: var(--sub);
+    }
+    .svc-main h3 { font-size: 1.25rem; font-weight: 900; margin-bottom: 12px; line-height: 1.3; }
+    .svc-desc { font-size: 0.85rem; color: var(--sub); line-height: 1.8; }
+    .svc-list-col { padding: 32px 32px; }
+    .svc-list { list-style: none; }
+    .svc-list li {
+      font-size: 0.83rem;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--sub);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .svc-list li::before { content: '→'; font-family: var(--mono); color: var(--accent); font-size: 0.8rem; flex-shrink: 0; }
+
+    /* ===== RESULTS ===== */
+    .results { background: var(--bg-warm); padding: 0 0 80px; }
+    .results-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1.5px solid var(--dark);
+      border-bottom: 1.5px solid var(--dark);
+      margin-bottom: 60px;
+    }
+    .stat-block {
+      padding: 36px 28px;
+      border-right: 1.5px solid var(--dark);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    .stat-num .unit { font-size: 1.4rem; }
+    .stat-label { font-size: 0.8rem; color: var(--sub); letter-spacing: 0.04em; }
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .case-card {
+      padding: 28px 24px;
+      border: 1.5px solid var(--dark);
+      margin: -1.5px 0 0 -1.5px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .case-card:hover { background: var(--dark); color: var(--bg); }
+    .case-card:hover .case-industry { color: var(--accent); }
+    .case-card:hover .case-body { color: rgba(255,255,255,0.65); }
+    .case-industry {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--sub);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .case-result {
+      font-size: 2rem;
+      font-weight: 900;
+      font-family: var(--mono);
+      color: var(--accent);
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+    .case-body { font-size: 0.83rem; color: var(--sub); line-height: 1.75; }
+
+    /* ===== TARGET ===== */
+    .target { background: var(--dark); color: var(--bg); padding: 0 0 80px; }
+    .target .sec-header { border-bottom-color: rgba(255,255,255,0.2); }
+    .target .sec-num { color: rgba(255,255,255,0.35); }
+    .target .sec-desc { color: rgba(255,255,255,0.5); }
+    .target-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .target-card {
+      padding: 36px 28px;
+      border: 1px solid rgba(255,255,255,0.15);
+      margin: -1px 0 0 -1px;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .target-card:hover { background: rgba(255,255,255,0.06); }
+    .target-card.main-target {
+      border-color: var(--accent);
+    }
+    .target-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--white);
+      padding: 3px 10px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .target-card h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 12px; }
+    .target-card p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.8; }
+
+    /* ===== FLOW ===== */
+    .flow { background: var(--bg); padding: 0 0 80px; }
+    .flow-steps { display: grid; grid-template-columns: repeat(5, 1fr); }
+    .flow-step {
+      padding: 28px 20px;
+      border-right: 1.5px solid var(--dark);
+      border-bottom: 1.5px solid var(--dark);
+      border-top: 1.5px solid var(--dark);
+    }
+    .flow-step:first-child { border-left: 1.5px solid var(--dark); }
+    .flow-step:hover { background: var(--dark); color: var(--bg); }
+    .flow-step:hover .flow-num { color: var(--accent); }
+    .flow-step:hover .flow-body { color: rgba(255,255,255,0.6); }
+    .flow-num {
+      font-family: var(--mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .flow-step h4 { font-size: 0.92rem; font-weight: 900; margin-bottom: 8px; }
+    .flow-body { font-size: 0.8rem; color: var(--sub); line-height: 1.7; }
+
+    /* ===== MARKETING ===== */
+    .marketing { background: var(--bg-warm); padding: 0 0 80px; }
+    .marketing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1.5px solid var(--dark);
+    }
+    .mkt-left {
+      padding: 48px 40px;
+      border-right: 1.5px solid var(--dark);
+    }
+    .mkt-left h3 { font-size: 1.6rem; font-weight: 900; line-height: 1.3; margin-bottom: 20px; letter-spacing: -0.02em; }
+    .mkt-left p { font-size: 0.88rem; color: var(--sub); line-height: 1.85; margin-bottom: 28px; }
+    .mkt-features { list-style: none; }
+    .mkt-features li {
+      font-size: 0.85rem;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+    .mkt-features li::before { content: '→'; font-family: var(--mono); color: var(--accent); font-size: 0.8rem; }
+    .mkt-right { padding: 48px 40px; background: var(--dark); color: var(--bg); }
+    .mkt-right h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 28px; color: rgba(255,255,255,0.9); }
+    .mkt-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.1); }
+    .mkt-stat {
+      background: var(--dark);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .mkt-stat .n {
+      font-family: var(--mono);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .mkt-stat .l { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .mkt-cta-wrap { margin-top: 28px; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials { background: var(--bg); padding: 0 0 80px; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .testi-card {
+      padding: 32px 28px;
+      border: 1.5px solid var(--dark);
+      margin: -1.5px 0 0 -1.5px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .testi-card:hover { background: var(--dark); color: var(--bg); }
+    .testi-card:hover .testi-role { color: rgba(255,255,255,0.45); }
+    .testi-card:hover .testi-text { color: rgba(255,255,255,0.75); }
+    .testi-stars {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+    .testi-text {
+      font-family: var(--serif);
+      font-size: 0.92rem;
+      color: var(--sub);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .testi-name { font-weight: 900; font-size: 0.88rem; }
+    .testi-role { font-size: 0.75rem; color: var(--sub); }
+
+    /* ===== FREE DL ===== */
+    .freedl { background: var(--bg-warm); padding: 0 0 80px; }
+    .freedl-inner {
+      border: 1.5px solid var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .freedl-left { padding: 48px 44px; border-right: 1.5px solid var(--dark); }
+    .freedl-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--white);
+      padding: 3px 12px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .freedl-left h2 { font-size: 1.6rem; font-weight: 900; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.02em; }
+    .freedl-left p { font-size: 0.87rem; color: var(--sub); line-height: 1.85; }
+    .freedl-right { padding: 48px 44px; background: var(--dark); color: var(--bg); }
+    .freedl-checklist { list-style: none; margin-bottom: 32px; }
+    .freedl-checklist li {
+      font-size: 0.87rem;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.75);
+    }
+    .freedl-checklist li::before { content: '✓'; font-family: var(--mono); color: var(--accent); font-weight: 700; }
+
+    /* ===== CTA ===== */
+    .cta-section { background: var(--dark); color: var(--bg); padding: 80px 0; }
+    .cta-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .cta-left { padding: 56px 48px; border-right: 1px solid rgba(255,255,255,0.15); }
+    .cta-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .cta-left h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.02em; }
+    .cta-left p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.85; }
+    .cta-right { padding: 56px 48px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+    .cta-note {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      font-family: var(--mono);
+      line-height: 1.8;
+      margin-top: 8px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.55);
+      border-top: 1.5px solid rgba(255,255,255,0.12);
+    }
+    .footer-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-col {
+      padding: 48px 32px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-col:last-child { border-right: none; }
+    .footer-logo {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .footer-logo em { font-style: normal; color: var(--accent); }
+    .footer-col p { font-size: 0.82rem; line-height: 1.8; color: rgba(255,255,255,0.4); }
+    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 16px; font-family: var(--mono); }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { font-size: 0.83rem; color: rgba(255,255,255,0.5); transition: color 0.15s; }
+    .footer-col ul li a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.25); font-family: var(--mono); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.75rem; color: rgba(255,255,255,0.25); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ===== FLOATING CTA ===== */
+    .floating-cta {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 99;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+    .floating-cta.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .floating-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 13px 22px;
+      border: 2px solid var(--accent);
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .floating-btn:hover { background: var(--accent2); border-color: var(--accent2); }
+
+    /* ===== FADE UP ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .wrap { padding: 0 24px; }
+      nav { display: none; }
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: var(--bg);
+        padding: 24px;
+        border-bottom: 1.5px solid var(--dark);
+        gap: 16px;
+        z-index: 99;
+        align-items: flex-start;
+      }
+      .hamburger { display: flex; }
+      .hero-main { grid-template-columns: 1fr; gap: 36px; }
+      .hero-cards { grid-template-columns: 1fr; }
+      .hero-card { border-right: none; border-bottom: 1.5px solid var(--dark); }
+      .pain-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .service-item { grid-template-columns: 60px 1fr; }
+      .svc-list-col { display: none; }
+      .results-strip { grid-template-columns: repeat(2, 1fr); }
+      .cases-grid { grid-template-columns: 1fr 1fr; }
+      .target-grid { grid-template-columns: 1fr; }
+      .flow-steps { grid-template-columns: 1fr 1fr; }
+      .flow-step:first-child { border-left: 1.5px solid var(--dark); }
+      .marketing-grid { grid-template-columns: 1fr; }
+      .mkt-left { border-right: none; border-bottom: 1.5px solid var(--dark); }
+      .testi-grid { grid-template-columns: 1fr; }
+      .freedl-inner { grid-template-columns: 1fr; }
+      .freedl-left { border-right: none; border-bottom: 1.5px solid var(--dark); }
+      .cta-inner { grid-template-columns: 1fr; }
+      .cta-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .sec-header { flex-direction: column; gap: 12px; }
+      .sec-desc { text-align: left; margin-left: 0; max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .hero-heading { font-size: 2.6rem; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .results-strip { grid-template-columns: 1fr 1fr; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .flow-steps { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .floating-cta { bottom: 16px; right: 16px; }
+      .header-inner { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">KaRa-<em>KuRi</em><span class="logo-ja">からくり</span></div>
+      <nav id="nav">
+        <a href="#services">Services</a>
+        <a href="#target">Target</a>
+        <a href="#flow">Flow</a>
+        <a href="#contact" class="nav-cta">無料相談</a>
+      </nav>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="hero-meta">
+          <span class="hero-issue">AI導入支援 × マーケティング支援 — 伴走型コンサルティング</span>
+          <span class="hero-date">Est. 2024</span>
+        </div>
+      </div>
+      <div class="hero-main">
+        <div class="hero-heading-wrap">
+          <div class="hero-deco">からくり</div>
+          <h1 class="hero-heading">
+            AI導入、<br>「何からやればいい？」を<br><span class="accent-line">卒業する。</span>
+          </h1>
+        </div>
+        <div class="hero-aside">
+          <p>個人事業主・中小企業から大企業まで。業務プロセスの根本見直しから、セキュアな環境構築、マーケティング強化まで。成果が出るまで一緒に走ります。</p>
+          <div class="hero-ctas">
+            <a href="#contact" class="btn-primary">
+              【無料】AI活用度診断・相談を申込む <span class="arrow">→</span>
+            </a>
+            <a href="#dl" class="btn-secondary">
+              【無料DL】業界別事例・プロンプト集 <span class="arrow">↓</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap" style="padding-left:0; padding-right:0; max-width:100%;">
+      <div class="wrap" style="padding:0;">
+        <div class="hero-cards">
+          <div class="hero-card">
+            <div class="hc-num">01 — PROBLEM</div>
+            <div class="hc-label">こんな悩みがある</div>
+            <ul class="hc-list">
+              <li class="hc-item">どこから手をつければ？</li>
+              <li class="hc-item">セキュリティが不安</li>
+              <li class="hc-item">成果が見えるか心配</li>
+              <li class="hc-item">社内に詳しい人がいない</li>
+              <li class="hc-item">費用対効果が読めない</li>
+            </ul>
+          </div>
+          <div class="hero-card">
+            <div class="hc-num">02 — SOLUTION</div>
+            <div class="hc-label">私たちの強み</div>
+            <ul class="hc-list">
+              <li class="hc-item">業務プロセスの徹底見直し</li>
+              <li class="hc-item">セキュアな環境構築</li>
+              <li class="hc-item">自社での圧倒的活用実績</li>
+              <li class="hc-item">マーケティング一体支援</li>
+              <li class="hc-item">大企業PMO対応も可能</li>
+            </ul>
+          </div>
+          <div class="hero-card">
+            <div class="hc-num">03 — PROMISE</div>
+            <div class="hc-label">私たちの約束</div>
+            <ul class="hc-list">
+              <li class="hc-item">AIを使い倒した当事者が支援</li>
+              <li class="hc-item">小規模〜大企業PMOまで対応</li>
+              <li class="hc-item">成果が出るまで伴走する</li>
+              <li class="hc-item">セキュリティ・ガバナンスも対応</li>
+              <li class="hc-item">マーケティングも一体支援</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN -->
+  <section class="pain">
+    <div class="wrap">
+      <div class="sec-header fade-up">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">こんなお悩み、<br><span class="acc">ありませんか？</span></h2>
+        <p class="sec-desc">多くの企業が抱える「AI導入あるある」。その壁を一つずつ取り除きます。</p>
+      </div>
+      <div class="pain-grid fade-up">
+        <div class="pain-card">
+          <div class="pain-num">PAIN — 01</div>
+          <h3>何から始めればいいかわからない</h3>
+          <p class="pain-body">ツールは溢れているのに、自社に何が合うのか判断できない。結局、何もできずに時間だけが過ぎていく。</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">PAIN — 02</div>
+          <h3>セキュリティリスクが怖い</h3>
+          <p class="pain-body">情報漏洩のリスクが心配で踏み出せない。どの範囲なら使っていいのか、社内ルールの作り方が見えない。</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">PAIN — 03</div>
+          <h3>成果が出るか不安</h3>
+          <p class="pain-body">導入コストをかけたのに効果が出なかった事例を聞く。本当に自社で費用対効果が出るのか確信が持てない。</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">PAIN — 04</div>
+          <h3>社内に推進できる人がいない</h3>
+          <p class="pain-body">AIに詳しい人材がいない。外部に頼みたいが、どこに頼めばいいかわからない。ベンダーへの丸投げも不安。</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">PAIN — 05</div>
+          <h3>マーケティングにお金がかかりすぎる</h3>
+          <p class="pain-body">広告費は増えているのに売上が伸びない。SNS・SEO・広告…何に注力すればいいかわからず費用が分散している。</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-num">PAIN — 06</div>
+          <h3>大規模プロジェクトの管理が複雑</h3>
+          <p class="pain-body">部署をまたぐAI化プロジェクトの調整が大変。ベンダー管理・要件定義を一手に担えるPMが社内にいない。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <div class="wrap">
+      <div class="sec-header fade-up">
+        <span class="sec-num" style="color:rgba(255,255,255,0.35)">02</span>
+        <h2 class="sec-title" style="color:var(--bg)">選ばれる<span class="acc">4つの理由</span></h2>
+        <p class="sec-desc">ツール販売ではなく、成果にこだわる「伴走型」支援が私たちの強みです。</p>
+      </div>
+      <div class="why-grid fade-up">
+        <div class="why-card">
+          <div class="why-card-num">REASON — 01</div>
+          <h3>業務プロセスから根本的に見直す</h3>
+          <p>AIを入れる前に「本当に必要な業務か」を徹底整理。無駄なプロセスを排除してから最適なAIを導入するため、費用対効果が最大化します。</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-num">REASON — 02</div>
+          <h3>セキュアな環境を一から構築</h3>
+          <p>情報漏洩ゼロのセキュリティポリシー策定から社内システムとの連携まで対応。「使いたいけど怖い」を「安心して使える」に変えます。</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-num">REASON — 03</div>
+          <h3>自社での圧倒的な活用実績</h3>
+          <p>自分たちが先に使い倒した経験から、本当に効果のある活用方法だけをご提案。机上の空論ではなく、実践知でお客様を支援します。</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-num">REASON — 04</div>
+          <h3>AI×マーケティングの一体支援</h3>
+          <p>AI効率化で浮いたリソースをマーケティングに集中投資。集客・育成・成約まで、ビジネス成果に直結する支援を行います。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-header fade-up">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">サービス内容</h2>
+        <p class="sec-desc">AI導入からマーケティング、大企業PMOまでワンストップで支援します。</p>
+      </div>
+      <div class="services-list fade-up">
+        <div class="service-item">
+          <div class="svc-num-col">
+            <div class="svc-num">SVC<br>01</div>
+          </div>
+          <div class="svc-main">
+            <div class="svc-tag">Flagship</div>
+            <h3>AI導入支援・<br>伴走型コンサルティング</h3>
+            <p class="svc-desc">現状分析から運用定着まで、プロジェクトを一貫サポート。個人事業主の業務自動化から、大企業のAI戦略立案・PMOまで対応します。</p>
+          </div>
+          <div class="svc-list-col">
+            <ul class="svc-list">
+              <li>AI活用度診断・現状分析（無料）</li>
+              <li>業務プロセスの可視化と整理</li>
+              <li>最適なAIツール選定・比較</li>
+              <li>セキュリティポリシー策定</li>
+              <li>社内GPT・RAG構築</li>
+              <li>プロンプトエンジニアリング研修</li>
+              <li>効果測定・KPI設計</li>
+              <li>大企業向けPMO支援</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="svc-num-col">
+            <div class="svc-num">SVC<br>02</div>
+          </div>
+          <div class="svc-main">
+            <div class="svc-tag">Marketing</div>
+            <h3>マーケティング支援</h3>
+            <p class="svc-desc">AI活用で効率化しながら、集客から成約まで一貫したマーケティング戦略を構築。デジタルマーケティング全般を支援します。</p>
+          </div>
+          <div class="svc-list-col">
+            <ul class="svc-list">
+              <li>マーケティング戦略立案</li>
+              <li>SEO対策・コンテンツ制作</li>
+              <li>SNS運用支援（AI活用）</li>
+              <li>広告運用（Web広告全般）</li>
+              <li>LP/サイト改善（CRO）</li>
+              <li>メルマガ・MA導入支援</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="svc-num-col">
+            <div class="svc-num">SVC<br>03</div>
+          </div>
+          <div class="svc-main">
+            <div class="svc-tag">Enterprise</div>
+            <h3>大企業向けPMO支援</h3>
+            <p class="svc-desc">AI導入プロジェクトのマネジメントを丸ごとサポート。ベンダー管理から社内調整、要件定義まで対応します。</p>
+          </div>
+          <div class="svc-list-col">
+            <ul class="svc-list">
+              <li>AI化プロジェクト要件定義</li>
+              <li>ベンダー選定・管理</li>
+              <li>部門横断プロジェクト管理</li>
+              <li>ガバナンス体制構築</li>
+              <li>社内啓発・研修設計</li>
+              <li>経営層向けレポーティング</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARGET -->
+  <section class="target" id="target">
+    <div class="wrap">
+      <div class="sec-header fade-up">
+        <span class="sec-num" style="color:rgba(255,255,255,0.35)">04</span>
+        <h2 class="sec-title" style="color:var(--bg)">こんな方が<span class="acc">対象です</span></h2>
+        <p class="sec-desc">規模や業種を問わず、「成果を出したい」すべての方にお応えします。</p>
+      </div>
+      <div class="target-grid fade-up">
+        <div class="target-card main-target">
+          <div class="target-tag">Main Target</div>
+          <h3>個人事業主・フリーランス</h3>
+          <p>一人でも大企業並みの生産性を。AI活用で業務を自動化し、あなたの専門スキルに集中できる環境を構築します。小口支援も対応。</p>
+        </div>
+        <div class="target-card main-target">
+          <div class="target-tag">Main Target</div>
+          <h3>中小企業・ベンチャー</h3>
+          <p>限られたリソースで最大成果を。業務効率化とマーケティング強化を同時に実現し、大企業に負けない競争力を身につけます。</p>
+        </div>
+        <div class="target-card">
+          <h3>大企業・上場企業</h3>
+          <p>複雑な組織でのAI導入PMO支援。部門間調整、ガバナンス構築、ベンダー管理まで、プロジェクト成功に向けて伴走します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="flow" id="flow">
+    <div class="wrap">
+      <div class="sec-header fade-up">
+        <span class="sec-num">05</span>
+        <h2 class="sec-title">支援の流れ</h2>
+        <p class="sec-desc">無料診断から始まり、成果が出るまで走り続けます。</p>
+      </div>
+      <div class="flow-steps fade-up">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <h4>無料診断・ヒアリング</h4>
+          <p class="flow-body">現状の業務課題や目標をお聞きし、AI活用可能性を診断します。完全無料です。</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <h4>戦略プランの提案</h4>
+          <p class="flow-body">診断結果をもとに、費用対効果の高いAI活用戦略と具体的な実行プランをご提案。</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <h4>環境構築・導入</h4>
+          <p class="flow-body">セキュリティを確保しながら最適なAIツールを選定・導入。社内研修も実施します。</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <h4>効果測定・改善</h4>
+          <p class="flow-body">KPIを定点観測し、データに基づいて継続改善。成果が出るまで粘り強く支援。</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">05</div>
+          <h4>マーケ拡大・次の成長</h4>
+          <p class="flow-body">AI効率化で生まれた余力をマーケティングへ。次の成長フェーズへ移行します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETING -->
+  <section class="marketing" id="marketing">
+    <div class="wrap">
+      <div class="sec-header fade-up">
+        <span class="sec-num">06</span>
+        <h2 class="sec-title">AI×マーケティングで<br><span class="acc">売上を科学する</span></h2>
+        <p class="sec-desc">効率化で浮いた時間・コストを戦略的なマーケへ。</p>
+      </div>
+      <div class="marketing-grid fade-up">
+        <div class="mkt-left">
+          <h3>業務効率化と集客を、同時に解決する。</h3>
+          <p>AIを駆使したコンテンツ制作・広告運用・顧客分析で、限られた予算でも最大の成果を実現します。AI活用で浮いた時間を、マーケティングへ集中投資。</p>
+          <ul class="mkt-features">
+            <li>AIコンテンツマーケティング</li>
+            <li>SEO戦略・記事制作</li>
+            <li>SNS運用・バズ戦略</li>
+            <li>Web広告最適化</li>
+            <li>メール・MA自動化</li>
+            <li>データ分析・継続改善</li>
+          </ul>
+        </div>
+        <div class="mkt-right">
+          <h3>AI活用マーケ導入後の変化</h3>
+          <div class="mkt-stats">
+            <div class="mkt-stat">
+              <div class="n">×3</div>
+              <div class="l">コンテンツ制作量</div>
+            </div>
+            <div class="mkt-stat">
+              <div class="n">−60%</div>
+              <div class="l">広告運用工数削減</div>
+            </div>
+            <div class="mkt-stat">
+              <div class="n">×2.3</div>
+              <div class="l">自然流入増加</div>
+            </div>
+            <div class="mkt-stat">
+              <div class="n">×1.5</div>
+              <div class="l">CVR改善</div>
+            </div>
+          </div>
+          <div class="mkt-cta-wrap">
+            <a href="#contact" class="btn-primary" style="background:var(--accent); border-color:var(--accent);">マーケ無料相談はこちら <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="wrap">
+      <div class="sec-header fade-up">
+        <span class="sec-num">07</span>
+        <h2 class="sec-title">お客様の声</h2>
+        <p class="sec-desc">実際にご支援させていただいたお客様からのメッセージです。</p>
+      </div>
+      <div class="testi-grid fade-up">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">「何から始めればいいか全くわからなかったが、無料診断から丁寧にサポートしてもらえた。今では社員全員がAIを日常的に使いこなしています。」</p>
+          <div class="testi-name">田中 様</div>
+          <div class="testi-role">製造業 / 従業員50名</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">「マーケティングとAI導入を同時に相談できたのが本当に助かった。コンテンツ制作の時間が劇的に減り、お客様との対話に使える時間が増えました。」</p>
+          <div class="testi-name">佐藤 様</div>
+          <div class="testi-role">個人事業主 / Webコンサルタント</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">「大企業側のPM経験もある方たちで、ベンダー管理から社内調整まで任せられた。AIプロジェクトが無事に完遂できたのは伴走支援があったおかげです。」</p>
+          <div class="testi-name">鈴木 様</div>
+          <div class="testi-role">大手商社 / DX推進部長</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE DL -->
+  <section class="freedl" id="dl">
+    <div class="wrap">
+      <div class="sec-header fade-up">
+        <span class="sec-num">08</span>
+        <h2 class="sec-title">無料ダウンロード</h2>
+        <p class="sec-desc">今すぐ使える資料を無料でお届けします。</p>
+      </div>
+      <div class="freedl-inner fade-up">
+        <div class="freedl-left">
+          <div class="freedl-eyebrow">Free Download</div>
+          <h2>業界別AI活用事例集・<br>プロンプトテンプレート集</h2>
+          <p>製造業・不動産・金融・EC・士業・医療など10業種以上の実際の活用事例と、すぐ使えるプロンプトテンプレート50種以上を収録。AI導入の第一歩を踏み出しましょう。</p>
+        </div>
+        <div class="freedl-right">
+          <ul class="freedl-checklist">
+            <li>業界別活用事例 — 10業種以上</li>
+            <li>プロンプトテンプレート — 50種以上</li>
+            <li>AI選定チェックシート</li>
+            <li>セキュリティポリシー雛形</li>
+          </ul>
+          <a href="#contact" class="btn-primary">無料でダウンロードする <span class="arrow">↓</span></a>
+          <p style="font-size:0.75rem; color:rgba(255,255,255,0.3); margin-top:12px; font-family:var(--mono);">※ 簡単なフォーム記入が必要です</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="wrap">
+      <div class="cta-inner fade-up">
+        <div class="cta-left">
+          <div class="cta-eyebrow">Free Consultation</div>
+          <h2>まず、無料で<br>相談してみませんか？</h2>
+          <p>診断・相談は完全無料。「話を聞くだけ」でも大歓迎です。あなたのビジネスに最適なAI活用戦略をご提案します。</p>
+        </div>
+        <div class="cta-right">
+          <a href="mailto:contact@example.com" class="btn-primary">【無料】AI活用度診断・相談を申込む <span class="arrow">→</span></a>
+          <a href="#dl" class="btn-secondary" style="border-color:rgba(255,255,255,0.3); color:var(--bg);">まずは資料だけ見る <span class="arrow">↓</span></a>
+          <p class="cta-note">
+            ✓ 相談・診断は完全無料<br>
+            ✓ 営業電話なし<br>
+            ✓ 個人情報の安全管理<br>
+            ✓ 最短翌営業日にご連絡
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-col" style="padding-left:40px;">
+        <div class="footer-logo">KaRa-<em>KuRi</em><span style="display:block; font-family:'Noto Serif JP',serif; font-size:0.58rem; font-weight:400; color:rgba(255,255,255,0.3); letter-spacing:0.22em; margin-top:4px;">からくり</span></div>
+        <p>「からくり」とは、巧みな仕掛けで人を動かす日本古来の技術。<br>現代のからくりであるAIで、あなたのビジネスに新しい動きをもたらします。</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">AI導入支援</a></li>
+          <li><a href="#marketing">マーケティング支援</a></li>
+          <li><a href="#services">大企業PMO</a></li>
+          <li><a href="#dl">無料事例集DL</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">会社概要</a></li>
+          <li><a href="#">代表プロフィール</a></li>
+          <li><a href="#">実績・事例</a></li>
+          <li><a href="#">ブログ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#contact">無料相談申込み</a></li>
+          <li><a href="#">よくある質問</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+          <li><a href="#">特定商取引法</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 KaRa-KuRi. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING CTA -->
+  <div class="floating-cta" id="floatingCta">
+    <a href="#contact" class="floating-btn">
+      無料相談する →
+    </a>
+  </div>
+
+  <script>
+    // Header scrolled
+    window.addEventListener('scroll', () => {
+      document.getElementById('floatingCta').classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Hamburger
+    function toggleMenu() {
+      document.getElementById('nav').classList.toggle('open');
+    }
+    document.querySelectorAll('#nav a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('nav').classList.remove('open'));
+    });
+
+    // Fade-up
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
